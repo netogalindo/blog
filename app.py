@@ -1,10 +1,8 @@
 from blog import Blog
-from post import Post
 
 # This is a constant
 MENU_PMT = "Enter 'c' to create a blog, 'l' to list blogs, 'r' to read a blog, 'p' to create a post, or 'q' to quit: "
 blogs = dict()
-
 
 
 def print_blogs():
@@ -14,12 +12,6 @@ def print_blogs():
 
 
 def ask_create_blog():
-    input_title = input("Enter the title of your blog: ")
-    input_author = input("Enter your name: ")
-    blogs[input_title] = Blog(input_title, input_author)
-
-
-def teste():
     input_title = input("Enter the title of your blog: ")
     input_author = input("Enter your name: ")
     blogs[input_title] = Blog(input_title, input_author)

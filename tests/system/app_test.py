@@ -12,9 +12,30 @@ class AppTest(TestCase):
 
     def test_menu_calls_create_blog(self):
         with patch("builtins.input") as mocked_input:
-            mocked_input.side_effect = ('c', 'Test Two', 'Test Author Two', 'q')
+            mocked_input.side_effect = ("c", "Test Two", "Test Author Two", "q")
             app.menu()
             self.assertIsNotNone(app.blogs['Test Two'])
+
+    def test_menu_calls_list_blogs(self):
+        with patch("app.print_blogs") as mocked_print_blogs:
+            with patch("builtins.input") as mocked_input:
+                mocked_input.side_effect = ("l", "q")
+                app.menu()
+                mocked_print_blogs.assert_called()
+
+    def test_menu_calls_read_blog(self):
+        with patch("app.ask_read_blog") as mocked_ask_read_blog:
+            with patch("builtins.input") as mocked_input:
+                mocked_input.side_effect = ("r", "Test", "q")
+                app.menu()
+                mocked_ask_read_blog.assert_called()
+
+    def test_menu_calls_create_post(self):
+        with patch("app.ask_create_post") as mocked_ask_create_post:
+            with patch("builtins.input") as mocked_input:
+                mocked_input.side_effect = ("p", "Test", "Post Title", "Post Content", "q")
+                app.menu()
+                mocked_ask_create_post.assert_called()
 
     def test_menu_prints_prompt(self):
         with patch("builtins.input", return_value="q") as mocked_input:
